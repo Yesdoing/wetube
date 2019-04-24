@@ -9,7 +9,11 @@
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "morgan": "^1.9.1"
   },
   "scripts": {
     "start": "nodemon --exec babel-node index.js --delay 2"
