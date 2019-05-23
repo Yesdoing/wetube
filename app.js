@@ -11,9 +11,9 @@ import { localsMiddleware } from './middlewares';
 
 const app = express();
 
-app.set('view engine', 'pug');
-
 app.use(helmet());
+app.set('view engine', 'pug');
+app.use("/uploads", express.static("uploads"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
