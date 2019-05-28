@@ -1,0 +1,13 @@
+.videoBlock {
+    video {
+        margin-bottom: 10px;
+        max-width: 100%;
+        min-height: 175px;
+        background-color: $dark-grey;
+    }
+    .videoBlock__title {
+        font-size: 18px;
+        font-weight: 300;
+        margin-bottom: 10px;
+    }
+}
