@@ -1,9 +1,12 @@
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from "express";
-import globalRouter from './routers/globalRouter';
-import helmet from 'helmet';
 import morgan from 'morgan';
+import helmet from 'helmet';
+import passport from 'passport';
+
+import "./passport";
+import globalRouter from './routers/globalRouter';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
 import routes from './routes' 
@@ -19,7 +22,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(localsMiddleware);
 
 app.use(routes.home, globalRouter);
