@@ -43,7 +43,7 @@ export const githubLoginCallback = async (
   cb
 ) => {
   const {
-    _json: { id, avatar_url, name, email }
+    _json: { id, avatar_url : avatarUrl, name, email }
   } = profile;
 
   try {
@@ -58,7 +58,7 @@ export const githubLoginCallback = async (
       email,
       name,
       githubId: id,
-      avatarUrl: avatar_url
+      avatarUrl
     });
 
     return cb(null, newUser);
@@ -69,15 +69,60 @@ export const githubLoginCallback = async (
 
 export const postGithubLogin = (req, res) => res.redirect(routes.home);
 
+export const naverLogin = passport.authenticate("naver");
+
+export const naverLoginCallback = async (accessToken, refreshToken, profile, cb) => {
+    const {
+        _json: { id, profile_image: avatarUrl, nickname: name, email}
+    } = profile;
+
+    try {
+        const user = await User.findOne({email});
+        if(user) {
+            user.facebookId = id;
+            user.save();
+            return cb(null, user);
+        }
+
+        const newUser = User.create({
+            email,
+            name,
+            facebookId: id,
+            avatarUrl
+        });
+
+        return cb(null, newUser);
+    } catch(error) {
+        return cb(error);
+    }
+}
+
+export const postNaverLogin = (req, res) => res.redirect(routes.home);
+
 export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
 };
 
 export const users = (req, res) => res.render("users", { pageTitle: "Users" });
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "UserDetail" });
+
+export const getMe = (req, res) => {
+    res.render("userDetail", { pageTitle: "UserDetail", user: req.user });
+}
+
+export const userDetail = async (req, res) => {
+    const { params: { id } }= req;
+    try {  
+        const user = await User.findById(id);
+        res.render("userDetail", { pageTitle: "UserDetail", user });
+    } catch(error) {
+        res.redirect(routes.home);
+    }
+}
+  
+
 export const editProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "EditProfile" });
+
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "ChangePassword" });

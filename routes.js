@@ -8,6 +8,7 @@ const SEARCH = "/search";
 
 // User 
 
+const ME = "/me";
 const USERS = "/users";
 const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
@@ -17,6 +18,11 @@ const CHANGE_PASSWORD = "/change-password";
 
 const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
+
+// Naver
+
+const NAVER = "/auth/naver";
+const NAVER_CALLBACK = "/auth/naver/callback";
 
 // Video
 
@@ -33,6 +39,7 @@ const routes = {
     logout: LOGOUT,
     search: SEARCH,
     users: USERS,
+    me: ME,
     userDetail: (id) => {
         if(id) {
             return `/users/${id}`;
@@ -65,7 +72,9 @@ const routes = {
         }
     },
     github: GITHUB,
-    githubCallback: GITHUB_CALLBACK
+    githubCallback: GITHUB_CALLBACK,
+    naver: NAVER,
+    naverCallback: NAVER_CALLBACK,
 };
 
 export default routes;
