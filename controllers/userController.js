@@ -79,7 +79,7 @@ export const naverLoginCallback = async (accessToken, refreshToken, profile, cb)
     try {
         const user = await User.findOne({email});
         if(user) {
-            user.facebookId = id;
+            user.naverId = id;
             user.save();
             return cb(null, user);
         }
@@ -87,7 +87,7 @@ export const naverLoginCallback = async (accessToken, refreshToken, profile, cb)
         const newUser = User.create({
             email,
             name,
-            facebookId: id,
+            naverId: id,
             avatarUrl
         });
 
@@ -113,7 +113,8 @@ export const getMe = (req, res) => {
 export const userDetail = async (req, res) => {
     const { params: { id } }= req;
     try {  
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate("videos");
+        console.log(user);
         res.render("userDetail", { pageTitle: "UserDetail", user });
     } catch(error) {
         res.redirect(routes.home);
