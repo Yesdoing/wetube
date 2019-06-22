@@ -24,6 +24,10 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const NAVER = "/auth/naver";
 const NAVER_CALLBACK = "/auth/naver/callback";
 
+// API 
+const API = "/api";
+const REGISTER_VIEW = "/:id/view";
+
 // Video
 
 const VIDEOS = "/videos";
@@ -75,6 +79,8 @@ const routes = {
     githubCallback: GITHUB_CALLBACK,
     naver: NAVER,
     naverCallback: NAVER_CALLBACK,
+    api: API,
+    registerView: REGISTER_VIEW,
 };
 
 export default routes;
