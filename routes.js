@@ -27,6 +27,7 @@ const NAVER_CALLBACK = "/auth/naver/callback";
 // API 
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
+const ADD_COMMENT = "/:id/comment";
 
 // Video
 
@@ -81,6 +82,7 @@ const routes = {
     naverCallback: NAVER_CALLBACK,
     api: API,
     registerView: REGISTER_VIEW,
+    addComment: ADD_COMMENT,
 };
 
 export default routes;
